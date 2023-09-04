@@ -1,0 +1,29 @@
+<mvc:View
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	controllerName="novedades.controller.Novedades"
+	height="100%">
+
+	<smartFilterBar:SmartFilterBar id="smartFilterBar"
+		entitySet="NovedadesSet" persistencyKey="SmartFilter_Explored" />
+
+	<smartTable:SmartTable id="tablaNovedades" entitySet="NovedadesSet" tableBindingPath="To_Novedades"
+		smartFilterId="smartFilterBar" beforeExport="onBeforeExport"
+		useVariantManagement="true" useTablePersonalisation="true" header="Novedades"
+		showRowCount="true" persistencyKey="SmartTableRefApp_Explored"
+		enableAutoBinding="true" class="sapUiResponsiveContentPadding"
+		tableType="ResponsiveTable" demandPopin="true" enableAutoColumnWidth="true"
+		showPasteButton="true" paste="onPaste" initiallyVisibleFields="NOMBRE_NOVEDAD,TIPO,MOTIVO,AREA,EMPLEADO_ID,FECHA_NOVEDAD,FECHA_TERMINA_NOV" showDetailsButton="true">
+		
+		<Table id="idResponsiveTable" selectionChange="handleSelectionChange" mode="SingleSelectMaster">
+			<headerToolbar>
+				<Toolbar id="_IDGenToolbar1">
+					<Button id="btnCalendar" icon="sap-icon://add-calendar" press="navToCalendar"/>
+				</Toolbar>
+			</headerToolbar>
+		</Table>
+	</smartTable:SmartTable>
+
+</mvc:View>

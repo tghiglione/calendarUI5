@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZGW_NOV_SRV" xml:lang="es" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Novedades" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="NOVEDAD_ID"/>
+                </Key>
+                <Property Name="NOVEDAD_ID" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Novedad_Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FECHA_NOVEDAD" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Fecha_Novedad" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="NOMBRE_NOVEDAD" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Nombre_Novedad" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="TIPO" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Tipo" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="MOTIVO" Type="Edm.String" Nullable="false" MaxLength="132" sap:unicode="false" sap:label="Motivo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EMPLEADO_ID" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Empleado_Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AREA" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Area" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Empleados" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EMPLEADO_ID"/>
+                </Key>
+                <Property Name="EMPLEADO_ID" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Empleado_Id" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NOMBRE" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="APELLIDO" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Apellido" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="AREA" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="Area" sap:creatable="false" sap:updatable="false"/>
+                <NavigationProperty Name="To_Novedades" Relationship="ZGW_NOV_SRV.EmpleadosToNovedades" FromRole="FromRole_EmpleadosToNovedades" ToRole="ToRole_EmpleadosToNovedades"/>
+            </EntityType>
+            <Association Name="EmpleadosToNovedades" sap:content-version="1">
+                <End Type="ZGW_NOV_SRV.Empleados" Multiplicity="1" Role="FromRole_EmpleadosToNovedades"/>
+                <End Type="ZGW_NOV_SRV.Novedades" Multiplicity="*" Role="ToRole_EmpleadosToNovedades"/>
+            </Association>
+            <EntityContainer Name="ZGW_NOV_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="NovedadesSet" EntityType="ZGW_NOV_SRV.Novedades" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="EmpleadosSet" EntityType="ZGW_NOV_SRV.Empleados" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="EmpleadosToNovedades_AssocSet" Association="ZGW_NOV_SRV.EmpleadosToNovedades" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="EmpleadosSet" Role="FromRole_EmpleadosToNovedades"/>
+                    <End EntitySet="NovedadesSet" Role="ToRole_EmpleadosToNovedades"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://stks4hpil.eastus2.cloudapp.azure.com:8002/sap/opu/odata/sap/ZGW_NOV_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://stks4hpil.eastus2.cloudapp.azure.com:8002/sap/opu/odata/sap/ZGW_NOV_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,100 @@
+<mvc:View
+	controllerName="novedades.controller.Calendar"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:l="sap.ui.layout"
+	xmlns:vbm="sap.ui.vbm"
+    xmlns:unified="sap.ui.unified"
+	height="100%">
+	<f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}">
+		<f:title>
+			<f:DynamicPageTitle id="_IDGenDynamicPageTitle1">
+				<f:heading>
+					<Title id="_IDGenTitle1" text="{NOMBRE} {APELLIDO}"/>
+				</f:heading>
+				
+				<f:actions>
+					<Switch state="true" customTextOn="Si" customTextOff="No" id="calendarVisible"  change="onSwitchChange">
+                        <layoutData>
+                            <FlexItemData id="_IDGenFlexItemData1" growFactor="1" />
+                        </layoutData>
+			        </Switch>
+				</f:actions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader id="_IDGenDynamicPageHeader1" pinnable="true">
+                <l:VerticalLayout id="_IDGenVerticalLayout1" class="sapUiMediumMarginEnd">
+                    <ObjectAttribute id="_IDGenObjectAttribute1" title="Area: " text="{AREA}"/>
+                </l:VerticalLayout>		
+			</f:DynamicPageHeader>
+		</f:header>
+        <f:content>
+            <VBox id="_IDGenVBox1" class="sapUiSmallMargin" >
+                <SinglePlanningCalendar
+                    id="calendarioNovedades"
+                    title= "Calendario Novedades"
+                    appointmentSelect="handleAppointmentSelect"
+                    headerDateSelect="handleHeaderDateSelect"
+                    startDateChange="handleStartDateChange"
+                    startDate="{path: 'calendario>/startDate'}"
+                    appointments="{path: 'calendario>/appointments'}">
+                    <actions>
+                        <Button id="addNewAppointment" text="Create" press="handleAppointmentCreate" tooltip="Add new appointment" />
+                        <Button  text="Ejemplo" press="ejemplo" />
+                    </actions>
+                    <views>
+                        <SinglePlanningCalendarDayView id="_IDGenSinglePlanningCalendarDayView1" key="DayView" title="Day" />
+                        <SinglePlanningCalendarWorkWeekView id="_IDGenSinglePlanningCalendarWorkWeekView1" key="WorkWeekView" title="Work Week" />
+                        <SinglePlanningCalendarWeekView id="_IDGenSinglePlanningCalendarWeekView1" key="WeekView" title="Week" />
+                    </views>
+                    <appointments>
+                        <unified:CalendarAppointment id="_IDGenCalendarAppointment1"
+                            title= "{calendario>title}"
+                            text= "{calendario>text}"
+                            startDate= "{calendario>startDate}"
+                            endDate= "{calendario>endDate}">
+                        </unified:CalendarAppointment>
+                    </appointments>
+                </SinglePlanningCalendar>
+                   <VBox id="formularioNovedades" visible="false">
+                    <Label id="labelFechaDesdeForm" text="Fecha Novedad" labelFor="datePicker"/>
+                            <DateTimePicker
+                                id="DTPStartDateForm"
+                                required="true"
+                                visible="{= !${allDay>/allDay}}"
+                                change="handleDateTimePickerChange"/>
+                            <DatePicker
+                                id="DPStartDateForm"
+                                required="true"
+                                visible="{= ${allDay>/allDay}}"
+                                change="handleDatePickerChange"/>
+                    <Label id="labelFechaHastaForm" text="Fecha Novedad" labelFor="datePickerHasta"/>
+                        <DateTimePicker
+                            id="DTPEndDateForm"
+                            required="true"
+                            visible="{= !${allDay>/allDay}}"
+                            change="handleDateTimePickerChange"/>
+                        <DatePicker
+                            id="DPEndDateForm"
+                            required="true"
+                            visible="{= ${allDay>/allDay}}"
+                            change="handleDatePickerChange"/>
+                    <Label id="labelNombreForm" text="Nombre Novedad" labelFor="inputNombreForm" />
+                    <Input id="inputNombreForm" />
+                    <Label id="labelTipoForm" text="Tipo" labelFor="inputTipoForm" />
+                    <Input id="inputTipoForm" />
+                    <Label id="labelMotivoForm" text="Motivo" labelFor="inputMotivoForm" />
+                    <Input id="inputMotivoForm" />
+                    <Label id="labelAreaForm" text="Area" labelFor="inputAreaForm" />
+                    <Input id="inputAreaForm" />
+                    <Button class="sapUiResponsiveMargin" id="btn-agregar" press="crearNovedadForm" text="Agregar Novedad"  type="Emphasized"/>	
+                    <Button id="btnejemplo" icon="sap-icon://add" press="ejemplo"/>
+                </VBox>
+            </VBox>
+        </f:content>
+	</f:DynamicPage>
+	
+</mvc:View>

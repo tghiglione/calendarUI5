@@ -1,0 +1,16 @@
+<mvc:View controllerName="novedades.controller.Empleados"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <List id="empleadosList"
+		headerText="Empleados"
+		items="{/EmpleadosSet}"
+        >
+		<StandardListItem id="empleadosList_items"
+			title="{NOMBRE} {APELLIDO}"
+			description="{AREA}"
+			type="Navigation" 
+            press="onEmpleadoPress"/>
+	</List>
+    </Page>
+</mvc:View>
